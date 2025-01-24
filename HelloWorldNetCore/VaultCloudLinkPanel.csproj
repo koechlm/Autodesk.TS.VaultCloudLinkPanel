@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CefSharp.Common.NETCore" Version="126.2.180" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="126.2.180" />
+    <PackageReference Include="chromiumembeddedframework.runtime.win-x64" Version="126.2.18" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Reference Include="Autodesk.Connectivity.Explorer.Extensibility">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.Connectivity.Explorer.Extensibility.dll</HintPath>
     </Reference>
@@ -35,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="HelloWorldNetCore.vcet.config">
+    <None Update="VaultCloudLinkPanel.vcet.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

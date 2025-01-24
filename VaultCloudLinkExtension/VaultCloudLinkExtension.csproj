@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Common.NETCore" Version="126.2.180" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="126.2.180" />
+    <PackageReference Include="chromiumembeddedframework.runtime.win-x64" Version="126.2.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Autodesk.Connectivity.Explorer.Extensibility">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.Connectivity.Explorer.Extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.Explorer.ExtensibilityTools">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.Connectivity.Explorer.ExtensibilityTools.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.Extensibility.Framework">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.Connectivity.Extensibility.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.Connectivity.WebServices">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.Connectivity.WebServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.DataManagement.Client.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework.Forms">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.DataManagement.Client.Framework.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Autodesk.DataManagement.Client.Framework.Vault">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\Autodesk Vault 2026 SDK\bin\x64\core\Autodesk.DataManagement.Client.Framework.Vault.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="CloudViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="VaultCloudLinkPanel.vcet.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
