@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaultCloudLinkExtension", "VaultCloudLinkExtension\VaultCloudLinkExtension.csproj", "{32EF1AB8-2EF5-438E-8E1E-ACBD594AF0F7}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{5CF84321-17BF-492A-BAF7-7CAD41968994}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,8 @@ Global
 		{32EF1AB8-2EF5-438E-8E1E-ACBD594AF0F7}.Debug|x64.Build.0 = Debug|Any CPU
 		{32EF1AB8-2EF5-438E-8E1E-ACBD594AF0F7}.Release|x64.ActiveCfg = Release|Any CPU
 		{32EF1AB8-2EF5-438E-8E1E-ACBD594AF0F7}.Release|x64.Build.0 = Release|Any CPU
+		{5CF84321-17BF-492A-BAF7-7CAD41968994}.Debug|x64.ActiveCfg = Debug
+		{5CF84321-17BF-492A-BAF7-7CAD41968994}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
