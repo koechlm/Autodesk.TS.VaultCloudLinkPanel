@@ -23,7 +23,7 @@ using Autodesk.DataManagement.Client.Framework.Vault.Currency.Connections;
 using System.Xml;
 using VltPlmAddIn.Utils;
 
-namespace VaultCloudLinkPanel
+namespace VaultCloudLinkExtension
 {
     /// <summary>
     /// The default SDK samples settings class, extended to support saving to and loading from the Vault KnowledgeOptions

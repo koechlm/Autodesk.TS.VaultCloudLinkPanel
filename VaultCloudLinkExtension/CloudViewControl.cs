@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 
-namespace VaultCloudLinkPanel
+namespace VaultCloudLinkExtension
 {
     public partial class CloudViewControl : UserControl
     {

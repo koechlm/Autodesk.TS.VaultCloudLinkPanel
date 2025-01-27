@@ -27,6 +27,8 @@ using VDFV = Autodesk.DataManagement.Client.Framework.Vault;
 using System.Data.Common;
 using System.Runtime;
 using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
+using VaultCloudLinkExtension;
+
 
 
 // These 5 assembly attributes must be specified or your extension will not load. 
@@ -43,7 +45,7 @@ using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
 [assembly: Autodesk.Connectivity.Extensibility.Framework.ApiVersion("19.0")]
 
 
-namespace VaultCloudLinkPanel
+namespace VaultCloudLinkExtension
 {
 
     /// <summary>
@@ -63,7 +65,7 @@ namespace VaultCloudLinkPanel
 
         internal static Settings? mSettings { get; set; }
 
-        internal static ACW.PropDef[]? mFldrPropDefs = null;
+        internal static PropDef[]? mFldrPropDefs = null;
 
         private static string? mUrl;
 
@@ -219,10 +221,10 @@ namespace VaultCloudLinkPanel
                     }
 
                     //get the selected folder's property values
-                    ACW.PropInst[]? mSourcePropInsts = conn?.WebServiceManager.PropertyService.GetPropertiesByEntityIds("FLDR", new long[] { FolderId });
+                    PropInst[]? mSourcePropInsts = conn?.WebServiceManager.PropertyService.GetPropertiesByEntityIds("FLDR", new long[] { FolderId });
                     string mPropDispName = mSettings.CloudLinkProperty;
                     long? mPropId = mFldrPropDefs?.Where(static n => n.DispName == mSettings.CloudLinkProperty).FirstOrDefault().Id;
-                    
+
                     //it might happen that the prop is not assigned to a folder
                     try
                     {

@@ -1,4 +1,4 @@
-﻿namespace VaultCloudLinkPanel
+﻿namespace VaultCloudLinkExtension
 {
     partial class CloudViewControl
     {
