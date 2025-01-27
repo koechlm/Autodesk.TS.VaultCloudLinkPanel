@@ -32,7 +32,7 @@ using Autodesk.DataManagement.Client.Framework.Vault.Currency.Entities;
 // These 5 assembly attributes must be specified or your extension will not load. 
 //[assembly: AssemblyCompany("Autodesk")]
 //[assembly: AssemblyProduct("VaultCloudLinkExtension")]
-[assembly: AssemblyDescription("Sample App")]
+[assembly: AssemblyDescription("Cloud Link Panel - Sample App")]
 
 // The extension ID needs to be unique for each extension.  
 // Make sure to generate your own ID when writing your own extension. 
