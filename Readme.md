@@ -1,5 +1,7 @@
 # Vault-Extension-Sample---VaultCloudLingExtension
 Sample extension to display a mapped cloud drive location in a dock panel.
+![image](https://github.com/user-attachments/assets/b88c68dc-f41b-4398-8a16-b083e95b078a)
+
 To map a cloud drive to a folder, add a user-defined property (UDP) to the folder and add the URL as text or Hyperlink text (Markdown).
 Register the UDP name and folder category in the VaultCloudLinkSettings.xml:
   <!-- Configure the display name of the Vault User Defined Property containing the link to the cloud drive or page to load -->
