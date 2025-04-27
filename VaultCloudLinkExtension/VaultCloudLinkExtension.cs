@@ -38,7 +38,7 @@ using VaultCloudLinkExtension;
 
 // The extension ID needs to be unique for each extension.  
 // Make sure to generate your own ID when writing your own extension. 
-[assembly: Autodesk.Connectivity.Extensibility.Framework.ExtensionId("[Guid(08D2A77C-D7D8-4837-AA7A-E22869474664)]")]
+[assembly: Autodesk.Connectivity.Extensibility.Framework.ExtensionId("08D2A77C-D7D8-4837-AA7A-E22869474664")]
 
 // This number gets incremented for each Vault release.
 // *ComponentUpgradeEveryRelease-Client*
@@ -68,6 +68,7 @@ namespace VaultCloudLinkExtension
         internal static PropDef[]? mFldrPropDefs = null;
 
         private static string? mUrl;
+        private static string? mCurrentUrl;
 
 
         #region IExtension Members
@@ -245,24 +246,26 @@ namespace VaultCloudLinkExtension
                 {
                 }
 
-                try
+                if (mUrl != mCurrentUrl && mUrl != "about:blank")
                 {
-                    // The event args has our custom panel object.  We need to cast it to our type.
-                    CloudViewControl? CefControl = e.Context.UserControl as CloudViewControl;
+                    // If the URL is different, we need to navigate to the new URL.
+                    try
+                    {
+                        // The event args has our custom panel object.  We need to cast it to our type.
+                        CloudViewControl? CefControl = e.Context.UserControl as CloudViewControl;
 
-                    // navigate URL, it might be blank as evaluated before
+                        // navigate URL, it might be blank as evaluated before
 
-                    // Send selection to the panel so that it can display the object.
-                    CefControl?.NavigateToUrlAsync(mUrl);
+                        // Send selection to the panel so that it can display the object.
+                        CefControl?.NavigateToUrlAsync(mUrl);
+                        mCurrentUrl = mUrl;
+                    }
+                    catch (Exception ex)
+                    {
+                        // If something goes wrong, we don't want the exception to bubble up to Vault Explorer.
+                    }
                 }
-                catch (Exception ex)
-                {
-                    // If something goes wrong, we don't want the exception to bubble up to Vault Explorer.
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-
             }
-
         }
 
 
