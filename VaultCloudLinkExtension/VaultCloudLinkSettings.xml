@@ -4,7 +4,7 @@
   <!-- Configure the display name of the Vault User Defined Property containing the link to the cloud drive or page to load -->
   <CloudLinkProperty>Cloud URL</CloudLinkProperty>
 
-  <!-- Configure the foöder category that contains the Cloud URL-->
-  <VaultFolderCat>Project</VaultFolderCat>
+  <!-- Configure the folder category that contains the Cloud URL; use "*" allowing any category-->
+  <VaultFolderCat>*</VaultFolderCat>
   
 </settings>

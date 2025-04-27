@@ -203,9 +203,9 @@ namespace VaultCloudLinkExtension
                 try
                 {
                     long FolderId = e.Context.SelectedObject.Id;
-                    //check if the current folder is of configured mapped category; iterate parents if not
+                    //check if URL navigation is limited to a specific categor only and the current folder matches it; iterate parents if not
                     ACW.Folder mFolder = conn.WebServiceManager.DocumentService.GetFolderById(FolderId);
-                    if (!(mFolder.Cat.CatName == mSettings?.VaultFolderCat))
+                    if (mSettings?.VaultFolderCat != "*" && !(mFolder.Cat.CatName == mSettings?.VaultFolderCat))
                     {
                         if (mFolder.FullName != "$")
                         {
@@ -230,6 +230,17 @@ namespace VaultCloudLinkExtension
                     try
                     {
                         mUrl = (string)mSourcePropInsts.Where(n => n.PropDefId == mPropId).FirstOrDefault().Val;
+                        
+                        // the link might include markdown syntax, so we need to decode it
+                        mUrl = System.Net.WebUtility.HtmlDecode(mUrl);
+
+                        // Check if the URL contains markdown syntax and extract the actual URL
+                        if (mUrl.StartsWith("[") && mUrl.Contains("](") && mUrl.EndsWith(")"))
+                        {
+                            int startIndex = mUrl.IndexOf("](") + 2;
+                            int endIndex = mUrl.LastIndexOf(")");
+                            mUrl = mUrl.Substring(startIndex, endIndex - startIndex);
+                        }
                     }
                     catch (Exception)
                     {
