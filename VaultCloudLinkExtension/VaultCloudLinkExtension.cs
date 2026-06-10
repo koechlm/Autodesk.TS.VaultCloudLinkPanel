@@ -42,7 +42,7 @@ using VaultCloudLinkExtension;
 
 // This number gets incremented for each Vault release.
 // *ComponentUpgradeEveryRelease-Client*
-[assembly: Autodesk.Connectivity.Extensibility.Framework.ApiVersion("19.0")]
+[assembly: Autodesk.Connectivity.Extensibility.Framework.ApiVersion("20.0")]
 
 
 namespace VaultCloudLinkExtension
@@ -107,7 +107,7 @@ namespace VaultCloudLinkExtension
 
             // Create a DockPanel for displaying in Vault Explorer
             DockPanel? CloudViewPanel = new DockPanel(Guid.Parse("A3F2C322-B55F-41B5-819E-2620534F1B21"),
-                                                "Cloud Link", typeof(CloudViewControl));
+                                                "Cloud Link", typeof(BrowserControl));
             CloudViewPanel.SelectionChanged += CloudViewPanel_SelectionChanged;
             dockPanels.Add(CloudViewPanel);
 
@@ -204,42 +204,52 @@ namespace VaultCloudLinkExtension
                 {
                     long FolderId = e.Context.SelectedObject.Id;
                     //check if URL navigation is limited to a specific categor only and the current folder matches it; iterate parents if not
-                    ACW.Folder mFolder = conn.WebServiceManager.DocumentService.GetFolderById(FolderId);
-                    if (mSettings?.VaultFolderCat != "*" && !(mFolder.Cat.CatName == mSettings?.VaultFolderCat))
+                    ACW.Folder? mFolder = conn?.WebServiceManager.DocumentService.GetFolderById(FolderId);
+                    if (mSettings?.VaultFolderCat != "*" && !(mFolder?.Cat.CatName == mSettings?.VaultFolderCat))
                     {
-                        if (mFolder.FullName != "$")
+                        if (mFolder != null && mFolder?.FullName != "$")
                         {
                             do
                             {
-                                mFolder = conn.WebServiceManager.DocumentService.GetFolderById(mFolder.ParId);
-                                if (mFolder.Cat.CatName == mSettings?.VaultFolderCat)
+                                if (mFolder == null) break;
+                                
+                                long parId = mFolder.ParId;
+                                mFolder = conn?.WebServiceManager.DocumentService.GetFolderById(parId);
+                                if (mFolder?.Cat.CatName == mSettings?.VaultFolderCat)
                                 {
-                                    FolderId = mFolder.Id;
+                                    if (mFolder != null)
+                                    {
+                                        FolderId = mFolder.Id;
+                                    }
                                     break;
                                 }
-                            } while (mFolder.FullName != "$");
+                            } while (mFolder?.FullName != "$");
                         }
                     }
 
                     //get the selected folder's property values
                     PropInst[]? mSourcePropInsts = conn?.WebServiceManager.PropertyService.GetPropertiesByEntityIds("FLDR", new long[] { FolderId });
-                    string mPropDispName = mSettings.CloudLinkProperty;
-                    long? mPropId = mFldrPropDefs?.Where(static n => n.DispName == mSettings.CloudLinkProperty).FirstOrDefault().Id;
+                    string? mPropDispName = mSettings?.CloudLinkProperty;
+                    long? mPropId = mFldrPropDefs?.Where(n => n.DispName == mSettings?.CloudLinkProperty).FirstOrDefault()?.Id;
 
                     //it might happen that the prop is not assigned to a folder
                     try
                     {
-                        mUrl = (string)mSourcePropInsts.Where(n => n.PropDefId == mPropId).FirstOrDefault().Val;
+                        var propInst = mSourcePropInsts?.FirstOrDefault(n => n.PropDefId == mPropId);
+                        mUrl = propInst?.Val as string;
                         
-                        // the link might include markdown syntax, so we need to decode it
-                        mUrl = System.Net.WebUtility.HtmlDecode(mUrl);
-
-                        // Check if the URL contains markdown syntax and extract the actual URL
-                        if (mUrl.StartsWith("[") && mUrl.Contains("](") && mUrl.EndsWith(")"))
+                        if (!string.IsNullOrEmpty(mUrl))
                         {
-                            int startIndex = mUrl.IndexOf("](") + 2;
-                            int endIndex = mUrl.LastIndexOf(")");
-                            mUrl = mUrl.Substring(startIndex, endIndex - startIndex);
+                            // the link might include markdown syntax, so we need to decode it
+                            mUrl = System.Net.WebUtility.HtmlDecode(mUrl);
+
+                            // Check if the URL contains markdown syntax and extract the actual URL
+                            if (mUrl.StartsWith("[") && mUrl.Contains("](") && mUrl.EndsWith(")"))
+                            {
+                                int startIndex = mUrl.IndexOf("](") + 2;
+                                int endIndex = mUrl.LastIndexOf(")");
+                                mUrl = mUrl.Substring(startIndex, endIndex - startIndex);
+                            }
                         }
                     }
                     catch (Exception)
@@ -263,12 +273,12 @@ namespace VaultCloudLinkExtension
                     try
                     {
                         // The event args has our custom panel object.  We need to cast it to our type.
-                        CloudViewControl? CefControl = e.Context.UserControl as CloudViewControl;
+                        BrowserControl? webViewControl = e.Context.UserControl as BrowserControl;
 
                         // navigate URL, it might be blank as evaluated before
 
                         // Send selection to the panel so that it can display the object.
-                        CefControl?.NavigateToUrlAsync(mUrl);
+                        webViewControl?.Navigate(mUrl);
                         mCurrentUrl = mUrl;
                     }
                     catch (Exception ex)

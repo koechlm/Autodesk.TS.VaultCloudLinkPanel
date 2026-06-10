@@ -51,7 +51,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Installer.msi"
+        "OutputFilename" = "8:Debug\\Adsk.Ts.Vault.CloudLinkPanel.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -88,7 +88,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Installer.msi"
+        "OutputFilename" = "8:Release\\Adsk.Ts.Vault.CloudLinkPanel.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -105,6 +105,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -272,16 +280,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Autodesk Vault 2026 Cloud Link Panel Extension Sample"
-        "ProductCode" = "8:{2B2681EF-1BE6-4461-895A-20269BB65D36}"
-        "PackageCode" = "8:{6AA34F42-F03A-490D-96AC-279EAAA21435}"
+        "ProductName" = "8:Autodesk Vault 2027 Cloud Link Panel Extension Sample"
+        "ProductCode" = "8:{38421106-F402-4F63-82C5-AF9190ECF44B}"
+        "PackageCode" = "8:{DB1EEE40-A363-44FC-A0E2-8DD76CB76D15}"
         "UpgradeCode" = "8:{4D4951C5-061D-4EA4-9895-1CC6980C7ADF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:31.0.02"
+        "ProductVersion" = "8:32.0.00"
         "Manufacturer" = "8:Autodesk"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -851,7 +859,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_973248EFC9344DE0A8816589266271F2"
             {
-            "SourcePath" = "8:..\\VaultCloudLinkExtension\\obj\\x64\\Debug\\net8.0-windows\\VaultCloudLinkExtension.dll"
+            "SourcePath" = "8:..\\VaultCloudLinkExtension\\obj\\x64\\Debug\\net10.0-windows\\VaultCloudLinkExtension.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_EEF7B09A521F43D0A16C12629B004227"
