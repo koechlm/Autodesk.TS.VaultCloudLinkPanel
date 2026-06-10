@@ -35,26 +35,33 @@ namespace VaultCloudLinkExtension
         private static string? mOptionName = null;
 
         [XmlElement("CloudLinkProperty")]
-        public string CloudLinkProperty;
+        public string CloudLinkProperty = string.Empty;
 
         [XmlElement("VaultFolderCat")]
-        public string VaultFolderCat;
+        public string VaultFolderCat = string.Empty;
 
         public Settings()
         {
 
         }
 
-        private static string GetSettingsPath()
+        private static string? GetSettingsPath()
         {
-            string codeFolder = Util.GetAssemblyPath();
+            string? codeFolder = Util.GetAssemblyPath();
+            if (codeFolder == null) return null;
+
             string xmlPath = Path.Combine(codeFolder, "VaultCloudLinkSettings.xml");
             return xmlPath;
         }
 
         public bool Save()
         {
-            string mFilePathandName = GetSettingsPath();
+            string? mFilePathandName = GetSettingsPath();
+            if (mFilePathandName == null)
+            {
+                return false;
+            }
+
             try
             {
                 using (System.IO.StreamWriter writer = new System.IO.StreamWriter(mFilePathandName))
@@ -72,7 +79,7 @@ namespace VaultCloudLinkExtension
 
         public bool SaveToVault(Connection connection)
         {
-            string settingsString = null;
+            string? settingsString = null;
 
             try
             {
@@ -91,22 +98,28 @@ namespace VaultCloudLinkExtension
             }
         }
 
-        public static Settings Load()
+        public static Settings? Load()
         {
-            Settings retVal = new Settings();
+            string? settingsPath = GetSettingsPath();
+            if (settingsPath == null)
+            {
+                return null;
+            }
 
-            using (System.IO.StreamReader reader = new System.IO.StreamReader(GetSettingsPath()))
+            Settings? retVal = new Settings();
+
+            using (System.IO.StreamReader reader = new System.IO.StreamReader(settingsPath))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Settings));
-                retVal = (Settings)serializer.Deserialize(reader);
+                retVal = (Settings?)serializer.Deserialize(reader);
             }
 
             return retVal;
         }
 
-        public static Settings LoadFromVault(Connection connection)
+        public static Settings? LoadFromVault(Connection connection)
         {
-            Settings retval = null;
+            Settings? retval = null;
 
             string settingsString = connection.WebServiceManager.KnowledgeVaultService.GetVaultOption(mOptionName);
             if (settingsString != null && settingsString.Length > 0)
@@ -117,7 +130,7 @@ namespace VaultCloudLinkExtension
                     {
                         XmlSerializer serializer = new XmlSerializer(typeof(Settings));
 
-                        retval = (Settings)serializer.Deserialize(reader);
+                        retval = (Settings?)serializer.Deserialize(reader);
                     }
                 }
                 catch
@@ -126,11 +139,11 @@ namespace VaultCloudLinkExtension
             return retval;
         }
 
-        public static string mGetVaultOption(Connection connection, string mOptionName)
+        public static string? mGetVaultOption(Connection connection, string mOptionName)
         {
             try
             {
-                string mOptionValue = connection.WebServiceManager.KnowledgeVaultService.GetVaultOption(mOptionName);
+                string? mOptionValue = connection.WebServiceManager.KnowledgeVaultService.GetVaultOption(mOptionName);
                 return mOptionValue;
             }
             catch (Exception)

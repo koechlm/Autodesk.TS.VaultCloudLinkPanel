@@ -42,7 +42,7 @@ namespace VltPlmAddIn.Utils
             }
         }
 
-        public static string GetAssemblyPath()
+        public static string? GetAssemblyPath()
         {
             string prefix = "file:///";
             string codebase = System.Reflection.Assembly.GetExecutingAssembly().Location;

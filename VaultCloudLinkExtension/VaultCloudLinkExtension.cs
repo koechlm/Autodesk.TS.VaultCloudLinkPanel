@@ -162,7 +162,7 @@ namespace VaultCloudLinkExtension
 
             mSettings = new Settings();
             mSettings = Settings.Load();
-            mCloudLinkUdpName = mSettings.CloudLinkProperty;
+            mCloudLinkUdpName = mSettings?.CloudLinkProperty;
         }
 
         /// <summary>
@@ -278,10 +278,13 @@ namespace VaultCloudLinkExtension
                         // navigate URL, it might be blank as evaluated before
 
                         // Send selection to the panel so that it can display the object.
-                        webViewControl?.Navigate(mUrl);
-                        mCurrentUrl = mUrl;
+                        if (!string.IsNullOrEmpty(mUrl))
+                        {
+                            webViewControl?.Navigate(mUrl);
+                            mCurrentUrl = mUrl;
+                        }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         // If something goes wrong, we don't want the exception to bubble up to Vault Explorer.
                     }

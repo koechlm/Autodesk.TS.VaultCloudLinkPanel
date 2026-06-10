@@ -2,7 +2,7 @@
 <settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   
   <!-- Configure the display name of the Vault User Defined Property containing the link to the cloud drive or page to load -->
-  <CloudLinkProperty>Cloud URL</CloudLinkProperty>
+  <CloudLinkProperty>Cloud Drive</CloudLinkProperty>
 
   <!-- Configure the folder category that contains the Cloud URL; use "*" allowing any category-->
   <VaultFolderCat>*</VaultFolderCat>
