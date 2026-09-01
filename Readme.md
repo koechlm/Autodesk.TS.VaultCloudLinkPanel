@@ -1,4 +1,4 @@
-# Vault-Extension-Sample---VaultCloudLingExtension
+# Vault-Extension-Sample---VaultCloudLinkExtension
 Sample extension to display a mapped cloud drive location in a dock panel.
 ![image](https://github.com/user-attachments/assets/b88c68dc-f41b-4398-8a16-b083e95b078a)
 
